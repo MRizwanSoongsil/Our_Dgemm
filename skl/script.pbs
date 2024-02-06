@@ -1,0 +1,47 @@
+#!/bin/bash
+#PBS -V
+#PBS -N MM.SKL
+#PBS -q norm_skl
+#PBS -l select=1:ncpus=40:mpiprocs=1:ompthreads=40
+#PBS -l walltime=00:10:00
+#PBS -A etc
+
+cd $PBS_O_WORKDIR
+
+module purge
+module load craype-x86-skylake intel/oneapi_21.2 impi/oneapi_21.2 
+
+export OMP_NUM_THREADS=40
+export OMP_PROC_BIND=close
+export OMP_PLACES=cores
+
+OUT_PATH=./out
+LOG_PATH=./log
+
+#for kernel in 'mkl' 'openblas' 'blis' 'userdgemm'
+for kernel in 'openblas'
+do
+	for size in {2000..40000..2000}
+	do
+		A=N
+		B=T
+		M=$size 
+		N=$size 
+		K=40
+		ALPHA=-1.0
+		BETA=1.0
+		${OUT_PATH}/dgemm_test_${kernel}.out Col ${A} ${B} ${M} ${N} ${K} ${ALPHA} ${BETA} 30 >> ${LOG_PATH}/${kernel}_k40_nt_anbp.log
+	done
+
+	for size in {2000..40000..2000}
+	do
+		A=T
+		B=N
+		M=$size 
+		N=40
+		K=$size
+		ALPHA=1.0
+		BETA=0.0
+		${OUT_PATH}/dgemm_test_${kernel}.out Col ${A} ${B} ${M} ${N} ${K} ${ALPHA} ${BETA} 30 >> ${LOG_PATH}/${kernel}_n40_tn_apbz.log
+	done
+done
