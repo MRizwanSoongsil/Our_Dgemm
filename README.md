@@ -6,12 +6,13 @@ Multiprocessors" by Rizwan  et al.
 
 ## Prerequisites
 
-Before running the code, you must have the following libraries installed on your system:
-
+Before running the code, you must have installed the following libraries installed on your system:
 - memkind
+- ScaLAPACK version 2.2.0
+- oneMKL
+=:  For benchmarking with BLIS and OpenBlas, following liberaries are also required
 - BLIS
 - OpenBLAS
-- ScaLAPACK version 2.2.0
 
 These libraries are essential for the proper execution of the program. Please follow the installation instructions provided by each library's official documentation.
 
