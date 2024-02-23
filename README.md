@@ -10,7 +10,7 @@ Before running the code, you must have installed the following libraries install
 - memkind
 - ScaLAPACK version 2.2.0
 - oneMKL
-=:  For benchmarking with BLIS and OpenBlas, following liberaries are also required
+For benchmarking with BLIS and OpenBlas, following liberaries are also required
 - BLIS
 - OpenBLAS
 
