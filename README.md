@@ -1,4 +1,4 @@
-# Our_Dgemm
+# Our_Dgemm2
 
 This repository contains the source code accompanying the paper titled "Revisiting the Performance Optimization of QR
 Factorization on Intel KNL and SKL
